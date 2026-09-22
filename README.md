@@ -200,7 +200,6 @@ A shared folder has no sender, no approval model and no brakes. Anyone who can w
 ## Known issues
 
 - Two sessions that each run `/session-comms` at the other both become initiator, and their HELLOs cross
-- Dollar amounts in `counsel/SKILL.md` can be swapped for your prompt words by Claude Code's argument substitution
 - `tools: []` on the member agent may not mean "no tools". File, web and connector access are proven blocked; other tools haven't been probed yet
 - The 3-message budget is tight for three or more sessions
 - The quote check can be fooled by a quote stitched across two members
