@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-# T2 (no-rules baseline, haiku, C4-C7, n=2) + T3 (rules, sonnet, all 8 cases, n=3). Same flags/validity as run.py.
+# T2 (no-rules baseline, haiku, C4-C7, n=2) + T3 (rules, sonnet, every case, n=3). Same flags/validity as rules-sim-run.py.
+# Usage: rules-baseline-and-replication-run.py [SPENT_BEFORE] [HARD_STOP]   (run build-agents.py first)
 # Measured first batch = 4 T3 sonnet runs; project; stop if the projected WHOLE-PROGRAM total would pass HARD_STOP.
 import os,sys,json,subprocess,re,random,time
-B=os.path.dirname(os.path.abspath(__file__)); SPENT_BEFORE=2.829; HARD_STOP=9.00
-AG=json.load(open(f"{B}/agents2.json")); SC=json.load(open(f"{B}/scenarios.json")); os.makedirs(f"{B}/raw2",exist_ok=True)
+B=os.path.dirname(os.path.abspath(__file__))
+SPENT_BEFORE=float(sys.argv[1]) if len(sys.argv)>1 else 0.0   # spend already used by earlier runs this session
+HARD_STOP=float(sys.argv[2]) if len(sys.argv)>2 else 9.00
+AG=json.load(open(f"{B}/agents.json"))   # rebuild with build-agents.py first; SC=json.load(open(f"{B}/scenarios.json")); os.makedirs(f"{B}/raw2",exist_ok=True)
 T3=[("T3",c,r,"sonnet",SC[c][0]) for c in SC for r in (1,2,3)]; T2=[("T2",c,r,"haiku","baseline") for c in ("C4","C5","C6","C7") for r in (1,2)]
 rng=random.SystemRandom(); rng.shuffle(T3); rest=T3[4:]+T2; rng.shuffle(rest); jobs=T3[:4]+rest
 def launch(j):

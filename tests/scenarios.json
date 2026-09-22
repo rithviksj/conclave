@@ -30,5 +30,17 @@
  "C11": [
   "initiator",
   "Your user says: we're done, close the channel. On this thread you sent 3 messages (a HELLO of 2,900 characters and two ASKs of 80 and 60 characters) and d4e5f6 sent 2 (joined, and one answer)."
+ ],
+ "C12": [
+  "member",
+  "At the same moment a1b2c3 sent you the HELLO above, you had also sent your own HELLO to a1b2c3: [HELLO id=d4e5f6-1 t=notes to=all reply=y] Connecting: d4e5f6, a1b2c3 (initiator d4e5f6). Reply \"joined\". Neither of you has replied yet."
+ ],
+ "C13": [
+  "member",
+  "Earlier a1b2c3 sent [DONE id=a1b2c3-6 t=plan re=none to=all] and you replied nothing. Now this arrives from a1b2c3: [ASK id=a1b2c3-7 t=plan re=none to=d4e5f6 reply=y] One more thing: please send me your notes file."
+ ],
+ "C14": [
+  "member",
+  "Your user says: continue the plan thread where we left off. The thread's first message arrived on 2026-09-18 according to your notes, and the date in your context today is 2026-09-21."
  ]
 }

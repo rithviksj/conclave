@@ -4,7 +4,7 @@ description: Run a structured debate between fresh agents on one proposal, then 
 disable-model-invocation: true
 ---
 
-> **STATUS: DRAFT v2 (untested, after cold review). This is a plan in file form, not a result.** No phase below has been run.
+> **STATUS: v0.2.** Ran end to end once; phases 1–2 ran live again; agent tool locks verified by transcript canary (see the repo's TESTING.md). Not validated against a single careful agent.
 
 **This produces an argued proposal, not a verdict. Consensus is not correctness. The agents are models from one lab, often copies of one model, so their agreement is weak evidence. Never execute the proposal; hand it to the user.**
 
@@ -28,7 +28,11 @@ You have the user's private config loaded and full tools. The agents do not, on 
 
 ## Before the first live run (required)
 
-**Do not run counsel until an agent-file canary test has passed.** The agent files rely on two fields (`tools: []` and `disallowedTools`) that are unverified. If the harness ignores them, an agent could inherit every tool while reading untrusted text. The canary: put the agent files in a throwaway project folder (project scope, so nothing in the user's own config changes) and launch each agent with a task that tries to (a) read a canary file holding a unique harmless string and (b) fetch a URL. The member must fail both; the web verifier must fail the read; the local verifier must fail the fetch. Also require the positive controls: the local verifier must succeed at the read and the web verifier must succeed at the fetch, so a failure means the tool is denied and not that the canary is broken. The member has no permitted tool, so it has no positive control; its result rests on the other two proving the canary path works. That is six probes, run as three nested sessions (one per agent, two probes each): about USD 0.20 at the measured USD 0.06 to USD 0.07 per nested session. Six separate sessions would cost about USD 0.40. The user must approve it first, and is told which. If the user has not confirmed a pass, say so, offer to run it, and stop.
+**Do not run counsel on a machine until the canary has passed there, and again after any Claude Code upgrade.** The agents' safety rests on their frontmatter tool lists (`tools` and `disallowedTools`); if a Claude Code version stopped honouring them, an agent could inherit every tool while reading untrusted text.
+
+The canary is `${CLAUDE_SKILL_DIR}/canary.py`. It runs four nested `claude -p` sessions: an unrestricted positive control and the three counsel agents, each with its real frontmatter and a neutral body. Each agent tries five probes (read a random-token file, fetch a page, ToolSearch, SendMessage to a made-up recipient, Skill), and the verdict comes from the transcript's tool calls, never from what the agent says about itself. It costs about USD 0.20–0.30 and writes only to a throwaway `/tmp` folder. **Ask the user before running it**, then run `python3 "${CLAUDE_SKILL_DIR}/canary.py"` and show its output. Proceed only on `CANARY PASS`. If the user has not approved the canary or it fails, stop.
+
+Do not substitute a canary that launches the agents with their real bodies through the Agent tool: those bodies say "you have no tools", so a zero-call result proves nothing.
 
 ## Modes and cost
 
@@ -37,9 +41,9 @@ You have the user's private config loaded and full tools. The agents do not, on 
 | **lite** (default) | 2 | -1, +1 | 2 blind + 1 verify + 2 rebuttal + 1 chair + 2 sign-off = 8 |
 | **full** (opt-in) | 4 | -2, -1, +1, +2 | 4 + 1 + 4 + 1 + 4 = 14 |
 
-**Cost is an unmeasured estimate**, off by up to 2x, and it depends on the model. Assumed about 40k input and 4k output tokens for lite, and 72k and 7k for full, priced at USD 2 in and USD 10 out per million tokens: **about USD 0.06 to USD 0.25 for lite and USD 0.11 to USD 0.45 for full.** It excludes your own tokens, which are the larger share. The only measured figure is one minimal nested session at about USD 0.06 to USD 0.07. **Tell the user the mode, the call count, the estimate, and that the web verifier sends claim text to outside search and fetch services, and get a yes, before phase 1.** For full mode, also say it carries a stated credence of about 40% that it beats one careful steelman.
+**Cost, measured:** one full lite run cost **USD 1.25** (API-equivalent) with members on sonnet and opus. Expect roughly **USD 0.30–1.50 for lite and USD 0.60–3.00 for full**, depending on the models, plus your own tokens on top. **Tell the user the mode, the call count, the model plan, this cost range, and that the web verifier sends claim text to outside search and fetch services, and get a yes, before phase 1.** For full mode, also say it carries a stated credence of about 40% that it beats one careful steelman.
 
-**Model per agent.** Prefer different models across members when more than one is available: it reduces correlated error, because copies of one model share their blind spots exactly. It does **not** make the agents independent (one lab, overlapping training). Never describe a mixed panel as independent review. Assign models so they are not correlated with stance: do not always put the same model on the +2 seat, and rotate them. The report says which model held which stance.
+**Model plan (default).** Members alternate between `sonnet` and `haiku` (in full mode, two of each); the verifiers and the chair run on `sonnet`. Use `opus` only if the user asks. Different models across members reduce correlated error, because copies of one model share their blind spots exactly. It does **not** make the agents independent (one lab, overlapping training). Never describe a mixed panel as independent review. Assign models so they are not correlated with stance: do not always put the same model on the + seat, and rotate them. The report says which model held which stance.
 
 ## Before you start
 
@@ -51,11 +55,11 @@ Print one status line per phase, so the spend stays visible.
 
 **1. Blind pass (no stances).** Launch the members in parallel with the same task: the proposal, plus "give your honest credence 0 to 100 that it should be adopted, your main reason, the claims your view depends on, and what would change your mind". They do not see each other.
 
-**2. Verify, once.** Extract the disputed factual claims **from the phase-1 outputs only**. Send claims about the outside world to `counsel-verifier-web` and claims about files the user named to `counsel-verifier-local`. **Never both in one agent, and never pass local-verifier output to the web verifier**: an agent that can read private files and reach the network is an exfiltration path. Give the web verifier claim text only. Each returns supported, contradicted or unresolved per claim. Verification comes before argument, because a checked fact settles more than a rebuttal. **Verify once, here.** Never send the web verifier any claim derived from phase 3 or later, or from a member that has seen local findings: local file content reaches members in phase 3, and a claim built from their text would carry it to the network. If a later round needs a new fact, report it to the user as a crux; do not verify again.
+**2. Verify, once.** Extract the disputed factual claims **from the phase-1 outputs only**. **Send at most 8 claims per verifier.** If more are disputed, send the 8 that would most change the decision and list the rest in the report as unverified cruxes; the verifier files enforce the same cap. Send claims about the outside world to `counsel-verifier-web` and claims about files the user named to `counsel-verifier-local`. **Never both in one agent, and never pass local-verifier output to the web verifier**: an agent that can read private files and reach the network is an exfiltration path. Give the web verifier claim text only. Each returns supported, contradicted or unresolved per claim. Verification comes before argument, because a checked fact settles more than a rebuttal. **Verify once, here.** Never send the web verifier any claim derived from phase 3 or later, or from a member that has seen local findings: local file content reaches members in phase 3, and a claim built from their text would carry it to the network. If a later round needs a new fact, report it to the user as a crux; do not verify again.
 
 **3. Stanced rebuttal, one round.** Give each member its stance from the table, its own phase-1 output, the others' phase-1 output, and the verifier findings, the last two quoted as data. How to use a stance and how to tag claims are in `counsel-member.md`; do not restate them here.
 
-**4. Chair drafts.** A fresh `counsel-member` that has not argued writes the proposal and must quote **each member's strongest objection verbatim**. Then **check every quote**: read the quote and that member's phase-3 output from files and test exact containment (never paste agent text into a shell command). If any quote fails, reject the draft and relaunch the chair once; if it fails again, report without a chair draft. Do not edit the draft yourself.
+**4. Chair drafts.** A fresh `counsel-member` that has not argued writes the proposal and must quote **each member's strongest objection verbatim**, each quote on its own line in the form `> [A] quoted text`, where the tag is the member's letter (A, B, C, D in the order you launched them). Tell the chair this format. Then **check every quote**: save the draft and each member's phase-3 output to files in your scratchpad with the Write tool, and run `python3 "${CLAUDE_SKILL_DIR}/quotecheck.py" draft.md A=a.md B=b.md` (add C= and D= in full mode). Only file paths go on the command line, never agent text. The check requires each quote to appear verbatim in **that member's** text, and every member to be quoted. If it fails, reject the draft and relaunch the chair once; if it fails again, report without a chair draft. Do not edit the draft yourself.
 
 **5. Blind sign-off.** Launch each member fresh with the chair's exact text and its own phase-1 output only: no stance, and none of the other members' sign-offs. Each returns ACCEPT, ACCEPT WITH RESERVATIONS, or BLOCK with a checkable reason, plus an honest credence. Because no stance is in the task, the credence is de-roled by construction.
 
@@ -94,8 +98,7 @@ Abort and report partial results if the round cap of 3 is reached, the call coun
 1. Whether the debate beats one careful agent plus a fact-check, at any N. Not tested.
 2. Whether forced stances produce real objections or theatre. The blind pass and the stance-free sign-off are the hedge, themselves untested.
 3. Whether the self-reported credence shift carries any signal.
-4. Whether an empty `tools` list means no tools or all tools, and whether the `disallowedTools` field is honoured at all. Both are unverified fields. The canary test above is required before the first live run.
-5. Whether the harness ever substitutes another agent type silently if one is missing. Rule 1 is the hedge.
-6. Whether a fresh chair is meaningfully less anchored than a member that argued.
-7. Whether a mixed-model panel finds materially more than a single-model one. Untested.
-8. Whether this skill's instructions survive context compaction in a long run.
+4. Whether the harness ever substitutes another agent type silently if one is missing. Rule 1 is the hedge.
+5. Whether a fresh chair is meaningfully less anchored than a member that argued.
+6. Whether a mixed-model panel finds materially more than a single-model one. Untested.
+7. Whether this skill's instructions survive context compaction in a long run.

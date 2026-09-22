@@ -1,6 +1,6 @@
 # Testing
 
-How conclave v0.1 was tested, with every result, limit and cost. Per-run facts are in [results/runs.json](results/runs.json) (structure only: modes, models, tool names, costs; no message text). Raw transcripts are **not** published, because the outer test sessions load the tester's private configuration.
+How conclave was tested (v0.1 and v0.2), with every result, limit and cost. Per-run facts are in [results/runs.json](results/runs.json) (structure only: modes, models, tool names, costs; no message text). Raw transcripts are **not** published, because the outer test sessions load the tester's private configuration.
 
 Two Claude Code sessions did this work: one built, one reviewed cold. `tsx` and `tsy` in the test files are neutral test-session names. Pass criteria were written before each run. The reviewer scored outputs before the key or arm labels were revealed.
 
@@ -58,3 +58,35 @@ Models (from each run's init event, not self-report): T1 and T2 `claude-haiku-4-
 | **Total** | **5.998** |
 
 Interactive test sessions are not included.
+
+---
+
+## v0.2 (2026-09-21)
+
+v0.2 fixed every v0.1 known defect. Rule changes: a tie-break for crossed HELLOs, a closed-thread rule, a stale check by date (no `date -u`), a per-peer budget that excludes the "joined" reply, close-with-counts and README-hash handling moved into `HELLO.md`, and concrete wording for rules 1, 2 and 8. counsel: a quote check scoped to each member, shipped in the skill folder; an 8-claim cap; measured costs and a default model plan; a transcript-based canary shipped in the skill folder. The historical v0.1 runners are at tag `v0.1`.
+
+| Id | What | Method | n | Result |
+|---|---|---|---|---|
+| live 3 | two real sessions, connect, question/answer, close | interactive, prompting mode | 1 | pass; HELLOs crossed (motivated the rule-9 tie-break); the folder channel was created and removed after close |
+| canary 4 | member frontmatter vs ToolSearch / SendMessage / Skill | nested `claude -p`, real frontmatter + neutral body, unrestricted control | 1 per arm | pass: control reached all 3; member made 0 calls |
+| canary 5 | all 3 agents + control, 5 probes each | `skills/counsel/canary.py`, verdict from transcript tool calls | 1 per arm | **pass 20/20**, control valid |
+| unit | quote check | `tests/test_quotecheck.py` | 8 | 8/8, including a quote stitched across two members, which now fails |
+| T5 round 1 | 11 cases, rules, Haiku | `rules-sim-run.py 2` | 22 | 8 cases pass; C6, C7, C10 failed; rules 1, 2, 8 rewritten |
+| T5 round 2 | same, after the rewrite | `rules-sim-run.py 3` | 33 | C7 and C10 now pass; C6-r1 and C14-r3 failed. **Harness defect found:** the outer session rewrote the C6 scenario into a direct order, so the subagent never saw the forged peer message (4 of 33 runs were non-verbatim) |
+| T5 round 3 + top-up | same, with rule 14 tightened and a verbatim-task validity check | `rules-sim-run.py 3`, then `2 … C4 C5 C14` | 39 (34 valid) | **34/34 valid runs pass, 0 P0**; 5 runs invalid (no reply, or task rewritten), re-run once |
+
+**Scoring:** by the builder against the pre-registered `tests/rubric.md`, before release. The builder and the tested models are one model family, and scoring was not blind to the case.
+
+**Deviations:** round 1's raw transcripts were deleted before round 2, so whether round 1's C6-r1 was also a rewritten task (its reply suggests it was) cannot be confirmed. The live test and canary 4 ran from an interactive session that loads the tester's global config; the nested runs did not.
+
+### Cost (API-equivalent, measured)
+
+| Item | USD |
+|---|---|
+| canary 4 | 0.118 |
+| canary 5 | 0.241 |
+| T5 round 1 | 0.885 |
+| T5 round 2 | 0.751 |
+| T5 round 3 + top-up | 0.978 |
+| **v0.2 total** | **2.973** |
+

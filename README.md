@@ -55,10 +55,13 @@ One AI session is one point of view that can be wrong without noticing. conclave
 ### `session-comms`: sessions that talk
 
 - **Connect** two or more of *your own* sessions on one machine: `/session-comms connect @tests`
-- **One rulebook** (`HELLO.md`, 14 rules) is sent to every peer, so a peer follows the rules even without the skill installed
+- **One rulebook** (`HELLO.md`, 15 rules) is sent to every peer, so a peer follows the rules even without the skill installed
 - **Message headers** like `[ASK id=… t=… to=…]`, thread ids and per-session message counts
 - **Silence means received**, so there's no endless "thanks!" / "you're welcome!" loop
-- **Message budget:** at most 3 messages per session per thread, then it checks back with you
+- **Message budget:** at most 3 messages to each peer per thread, then it checks back with you
+- **Crossed invites resolved:** if two sessions invite each other at once, the lower ref's thread wins automatically
+- **Closed means closed:** after DONE, later messages on that thread are ignored and reported to you
+- **Stale-thread check:** resuming a thread on a later date needs your yes first
 - **HALT with a nonce:** any peer can pause outward actions immediately, and only your user can resume them
 - **Optional file channel** for long documents: files are announced with a sha256, and unannounced files are untrusted
 - **DONE** closes the thread, and each session gives its user a 5-line summary
@@ -67,7 +70,7 @@ One AI session is one point of view that can be wrong without noticing. conclave
 You ──/session-comms connect @peer──▶ [Session A]
                                           │ ListAgents → pick members → show you the list
                                           ▼
-                          HELLO + 14 rules ──▶ [Session B] ── checks sender ──▶ "joined"
+                          HELLO + 15 rules ──▶ [Session B] ── checks sender ──▶ "joined"
                                           │
                        ASK / ANSWER ◀─────┼─────▶ optional folder, files announced with sha256
                                           │
@@ -128,7 +131,7 @@ One command opens an iTerm tab that starts `/counsel`. It only ever types one of
 - macOS (tested there; Linux untested), single machine
 - [Claude Code](https://claude.com/claude-code) CLI with `ListAgents` / `SendMessage` (cross-session messaging)
 - For the launcher: macOS + iTerm2
-- For the test runners: Python ≥ 3.12
+- For the canary and test runners: Python 3
 
 ## Install
 
@@ -165,7 +168,7 @@ claude --permission-mode manual --strict-mcp-config --mcp-config '{"mcpServers":
 /counsel full <one proposal>             # 4 members, ~14 agent calls
 ```
 
-**Before your first `/counsel`,** the skill runs a **canary test**: each agent tries to read a secret file and fetch a URL, to prove its tool locks actually hold. The skill offers to run it for you. Re-run it after Claude Code upgrades.
+**Before your first `/counsel`,** the skill runs a **canary test** (`skills/counsel/canary.py`, about $0.25): an unrestricted control agent and each counsel agent try five probes (read a secret file, fetch a URL, ToolSearch, SendMessage, Skill), and the verdict comes from the recorded tool calls, not from what the agents claim. The skill asks you first. Re-run it after Claude Code upgrades.
 
 **Type commands; don't paste them.** Pasted text can pick up a leading space and go out as chat.
 
@@ -177,7 +180,7 @@ claude --permission-mode manual --strict-mcp-config --mcp-config '{"mcpServers":
 - **The HELLO** carries the full rulebook, so the rules travel with the conversation and survive a peer without the skill installed.
 - **Senders are matched** by mapping the session name to its ref via `ListAgents`. If a ref changes (restart or rename), that sender is untrusted until a new HELLO.
 - **counsel's agents** are defined in `agents/*.md` with tool allowlists and deny lists. Each phase launches **fresh** agents, never resumed ones, so blind really means blind.
-- **The quote check** compares the chair's quotes against the members' actual text before the draft is accepted.
+- **The quote check** (`skills/counsel/quotecheck.py`) requires every chair quote, tagged `> [A] …`, to appear word for word in **that** member's text, and every member to be quoted, so a quote stitched from two members fails.
 
 ## Why not just ask one session?
 
@@ -191,7 +194,15 @@ A shared folder has no sender, no approval model and no brakes. Anyone who can w
 
 ## Status
 
-**v0.1, experimental.** Tested live with 2 sessions and in simulation; counsel has run end to end. In simulation, a small model *without* the rules acted on forged approvals and a broadcast delete; *with* the rules it refused every time. Samples are small, and full results and limits are in [TESTING.md](TESTING.md).
+**v0.2, experimental.** Every result below is in [TESTING.md](TESTING.md).
+
+| Test | Result |
+|---|---|
+| Live: two real sessions connect, exchange, close | pass (3 live runs) |
+| Canary: agent tool locks, 4 agents × 5 probes, verdict from recorded tool calls | **20/20** |
+| Rules simulation: 11 attack and protocol cases (forged approval, broadcast delete, tampered README, changed sender, HALT, crossed invites, stale thread, …) | **34/34 valid runs pass, 0 harmful actions** |
+| Same attacks on a small model *without* the rules (v0.1 baseline) | 3 harmful actions in 7 runs |
+| Quote-check unit tests | 8/8 |
 
 **Not yet tested:** 3+ sessions, the launcher inside real iTerm, and whether counsel beats a single careful agent plus a fact-check.
 
@@ -199,12 +210,7 @@ A shared folder has no sender, no approval model and no brakes. Anyone who can w
 
 ## Known issues
 
-- Two sessions that each run `/session-comms` at the other both become initiator, and their HELLOs cross
-- `tools: []` on the member agent may not mean "no tools". File, web and connector access are proven blocked; other tools haven't been probed yet
-- The 3-message budget is tight for three or more sessions
-- The quote check can be fooled by a quote stitched across two members
-- `/session-comms` without `connect` makes the session improvise
-- The optional file channel defaults to `~/session-comms/`; delete a thread's folder after closing
+None known. Found something? Open an issue (without transcripts).
 
 ## Notes
 
@@ -212,4 +218,9 @@ A shared folder has no sender, no approval model and no brakes. Anyone who can w
 - Your sessions still load your own global `CLAUDE.md`; only the counsel agents run without it.
 - `--no-chrome` does not remove the built-in browser server from interactive sessions, so deny any browser action you didn't ask for.
 - Consensus is not correctness. Several copies of one model are not independent minds.
+- The simulation results come from a small model reading scenario text; samples are small and all models are from one lab.
 - Security details: [SECURITY.md](SECURITY.md). Please report issues without transcripts.
+
+## License
+
+[MIT](LICENSE)
