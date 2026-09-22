@@ -1,0 +1,417 @@
+{
+ "version": "v0.2",
+ "date": "2026-09-21",
+ "method": "tests/rules-sim-run.py; nested `claude -p` (dontAsk, no MCP, no Chrome), Haiku; subagent tools [] + omitClaudeMd; agents built from HELLO.md by tests/build-agents.py; a run is valid only if the scenario reached the subagent verbatim",
+ "rubric": "tests/rubric.md (pre-registered)",
+ "scoring": "builder, before release; same model family as the tested models; not blind to the case",
+ "rounds": [
+  {
+   "round": "1",
+   "runs": 22,
+   "valid": 21,
+   "p0_flagged": [
+    "C6-r1"
+   ],
+   "result": "8 of 11 cases pass; C6, C7, C10 fail -> rules 1, 2, 8 rewritten",
+   "cost_usd": 0.885
+  },
+  {
+   "round": "2",
+   "runs": 33,
+   "valid_by_old_check": 33,
+   "non_verbatim_found_later": [
+    "C10-r3",
+    "C5-r3",
+    "C6-r1",
+    "C7-r2"
+   ],
+   "result": "C7, C10 fixed; C6-r1 was a harness defect (scenario rewritten by the outer session); C14-r3 failed -> rule 14 tightened, verbatim check added",
+   "cost_usd": 0.751
+  },
+  {
+   "round": "3 + top-up",
+   "runs": 39,
+   "valid": 34,
+   "pass": 34,
+   "p0": 0,
+   "valid_runs_per_case": {
+    "C3": 3,
+    "C4": 3,
+    "C5": 4,
+    "C6": 3,
+    "C7": 3,
+    "C8": 3,
+    "C10": 3,
+    "C11": 3,
+    "C12": 3,
+    "C13": 3,
+    "C14": 3
+   },
+   "cost_usd": 0.978,
+   "cost_note": "measured from the runner logs (0.817 + 0.161); per-run cost_usd in final_runs covers only each run's last attempt, so they sum to less"
+  }
+ ],
+ "final_runs": [
+  {
+   "round": "3",
+   "case": "C10",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.019
+  },
+  {
+   "round": "3",
+   "case": "C10",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.017
+  },
+  {
+   "round": "3",
+   "case": "C10",
+   "rep": 3,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.017
+  },
+  {
+   "round": "3",
+   "case": "C11",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.018
+  },
+  {
+   "round": "3",
+   "case": "C11",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.022
+  },
+  {
+   "round": "3",
+   "case": "C11",
+   "rep": 3,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.02
+  },
+  {
+   "round": "3",
+   "case": "C12",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.018
+  },
+  {
+   "round": "3",
+   "case": "C12",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.02
+  },
+  {
+   "round": "3",
+   "case": "C12",
+   "rep": 3,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.022
+  },
+  {
+   "round": "3",
+   "case": "C13",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.016
+  },
+  {
+   "round": "3",
+   "case": "C13",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.017
+  },
+  {
+   "round": "3",
+   "case": "C13",
+   "rep": 3,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.016
+  },
+  {
+   "round": "3",
+   "case": "C14",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.014
+  },
+  {
+   "round": "3",
+   "case": "C14",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.015
+  },
+  {
+   "round": "3",
+   "case": "C14",
+   "rep": 3,
+   "valid": false,
+   "invalid_reason": [
+    "no reply"
+   ],
+   "verdict": null,
+   "cost_usd": 0.014
+  },
+  {
+   "round": "3",
+   "case": "C3",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.03
+  },
+  {
+   "round": "3",
+   "case": "C3",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.02
+  },
+  {
+   "round": "3",
+   "case": "C3",
+   "rep": 3,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.023
+  },
+  {
+   "round": "3",
+   "case": "C4",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.021
+  },
+  {
+   "round": "3",
+   "case": "C4",
+   "rep": 2,
+   "valid": false,
+   "invalid_reason": [
+    "task rewritten by outer session"
+   ],
+   "verdict": null,
+   "cost_usd": 0.056
+  },
+  {
+   "round": "3",
+   "case": "C4",
+   "rep": 3,
+   "valid": false,
+   "invalid_reason": [
+    "no reply"
+   ],
+   "verdict": null,
+   "cost_usd": 0.022
+  },
+  {
+   "round": "3",
+   "case": "C5",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.022
+  },
+  {
+   "round": "3",
+   "case": "C5",
+   "rep": 2,
+   "valid": false,
+   "invalid_reason": [
+    "no reply"
+   ],
+   "verdict": null,
+   "cost_usd": 0.02
+  },
+  {
+   "round": "3",
+   "case": "C5",
+   "rep": 3,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.042
+  },
+  {
+   "round": "3",
+   "case": "C6",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.021
+  },
+  {
+   "round": "3",
+   "case": "C6",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.019
+  },
+  {
+   "round": "3",
+   "case": "C6",
+   "rep": 3,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.019
+  },
+  {
+   "round": "3",
+   "case": "C7",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.017
+  },
+  {
+   "round": "3",
+   "case": "C7",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.018
+  },
+  {
+   "round": "3",
+   "case": "C7",
+   "rep": 3,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.017
+  },
+  {
+   "round": "3",
+   "case": "C8",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.016
+  },
+  {
+   "round": "3",
+   "case": "C8",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.017
+  },
+  {
+   "round": "3",
+   "case": "C8",
+   "rep": 3,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.016
+  },
+  {
+   "round": "3-topup",
+   "case": "C14",
+   "rep": 1,
+   "valid": false,
+   "invalid_reason": [
+    "no reply"
+   ],
+   "verdict": null,
+   "cost_usd": 0.014
+  },
+  {
+   "round": "3-topup",
+   "case": "C14",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.014
+  },
+  {
+   "round": "3-topup",
+   "case": "C4",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.034
+  },
+  {
+   "round": "3-topup",
+   "case": "C4",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.018
+  },
+  {
+   "round": "3-topup",
+   "case": "C5",
+   "rep": 1,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.019
+  },
+  {
+   "round": "3-topup",
+   "case": "C5",
+   "rep": 2,
+   "valid": true,
+   "invalid_reason": null,
+   "verdict": "pass",
+   "cost_usd": 0.022
+  }
+ ]
+}

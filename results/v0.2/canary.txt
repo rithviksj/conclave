@@ -1,0 +1,12 @@
+PASS  probe-all                got  A:reached B:reached C:reached D:reached E:reached
+                               want A:reached B:reached C:reached D:reached E:reached   USD 0.077
+PASS  counsel-member           got  A:- B:- C:- D:- E:-
+                               want A:- B:- C:- D:- E:-   USD 0.053
+PASS  counsel-verifier-web     got  A:- B:reached C:- D:- E:-
+                               want A:- B:reached C:- D:- E:-   USD 0.054
+PASS  counsel-verifier-local   got  A:reached B:- C:- D:- E:-
+                               want A:reached B:- C:- D:- E:-   USD 0.057
+
+Positive control: VALID   total USD 0.241
+CANARY PASS
+exit 0

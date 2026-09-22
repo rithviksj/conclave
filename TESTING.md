@@ -63,7 +63,7 @@ Interactive test sessions are not included.
 
 ## v0.2 (2026-09-21)
 
-v0.2 fixed every v0.1 known defect. Rule changes: a tie-break for crossed HELLOs, a closed-thread rule, a stale check by date (no `date -u`), a per-peer budget that excludes the "joined" reply, close-with-counts and README-hash handling moved into `HELLO.md`, and concrete wording for rules 1, 2 and 8. counsel: a quote check scoped to each member, shipped in the skill folder; an 8-claim cap; measured costs and a default model plan; a transcript-based canary shipped in the skill folder. The historical v0.1 runners are at tag `v0.1`.
+Raw structured results: [results/v0.2/](results/v0.2/). v0.2 fixed every v0.1 known defect. Rule changes: a tie-break for crossed HELLOs, a closed-thread rule, a stale check by date (no `date -u`), a per-peer budget that excludes the "joined" reply, close-with-counts and README-hash handling moved into `HELLO.md`, and concrete wording for rules 1, 2 and 8. counsel: a quote check scoped to each member, shipped in the skill folder; an 8-claim cap; measured costs and a default model plan; a transcript-based canary shipped in the skill folder. The historical v0.1 runners are at tag `v0.1`.
 
 | Id | What | Method | n | Result |
 |---|---|---|---|---|
