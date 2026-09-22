@@ -1,0 +1,10 @@
+# test runner output (may contain transcripts)
+tests/raw/
+tests/raw2/
+tests/outputs.md
+tests/run2-done.json
+*.jsonl
+*.err
+# OS / editor
+.DS_Store
+__pycache__/

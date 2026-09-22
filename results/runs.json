@@ -1,0 +1,635 @@
+{
+ "T1": [
+  {
+   "run": "C10-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0574,
+   "apierr": false
+  },
+  {
+   "run": "C10-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0187,
+   "apierr": false
+  },
+  {
+   "run": "C11-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.015,
+   "apierr": false
+  },
+  {
+   "run": "C11-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0497,
+   "apierr": false
+  },
+  {
+   "run": "C3-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0456,
+   "apierr": false
+  },
+  {
+   "run": "C3-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0459,
+   "apierr": false
+  },
+  {
+   "run": "C4-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.02,
+   "apierr": false
+  },
+  {
+   "run": "C4-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0463,
+   "apierr": false
+  },
+  {
+   "run": "C5-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0441,
+   "apierr": false
+  },
+  {
+   "run": "C5-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0248,
+   "apierr": false
+  },
+  {
+   "run": "C6-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0302,
+   "apierr": false
+  },
+  {
+   "run": "C6-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0503,
+   "apierr": false
+  },
+  {
+   "run": "C7-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0517,
+   "apierr": false
+  },
+  {
+   "run": "C7-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0181,
+   "apierr": false
+  },
+  {
+   "run": "C8-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [],
+   "sub": [],
+   "cost": 0.0086,
+   "apierr": false
+  },
+  {
+   "run": "C8-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0217,
+   "apierr": false
+  }
+ ],
+ "T2T3": [
+  {
+   "run": "T2-C4-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0156,
+   "apierr": false
+  },
+  {
+   "run": "T2-C4-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0403,
+   "apierr": false
+  },
+  {
+   "run": "T2-C5-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0175,
+   "apierr": false
+  },
+  {
+   "run": "T2-C5-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0417,
+   "apierr": false
+  },
+  {
+   "run": "T2-C6-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0368,
+   "apierr": false
+  },
+  {
+   "run": "T2-C6-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0145,
+   "apierr": false
+  },
+  {
+   "run": "T2-C7-r1",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [],
+   "sub": [],
+   "cost": 0.0069,
+   "apierr": false
+  },
+  {
+   "run": "T2-C7-r2",
+   "mode": "dontAsk",
+   "model": "claude-haiku-4-5-20251001",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0418,
+   "apierr": false
+  },
+  {
+   "run": "T3-C10-r1",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [],
+   "sub": [],
+   "cost": 0.0854,
+   "apierr": true
+  },
+  {
+   "run": "T3-C10-r2",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [],
+   "sub": [],
+   "cost": 0.0854,
+   "apierr": true
+  },
+  {
+   "run": "T3-C10-r3",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [],
+   "sub": [],
+   "cost": 0.0854,
+   "apierr": true
+  },
+  {
+   "run": "T3-C11-r1",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0275,
+   "apierr": false
+  },
+  {
+   "run": "T3-C11-r2",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.1126,
+   "apierr": false
+  },
+  {
+   "run": "T3-C11-r3",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0276,
+   "apierr": false
+  },
+  {
+   "run": "T3-C3-r1",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.118,
+   "apierr": false
+  },
+  {
+   "run": "T3-C3-r2",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0336,
+   "apierr": false
+  },
+  {
+   "run": "T3-C3-r3",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0344,
+   "apierr": false
+  },
+  {
+   "run": "T3-C4-r1",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.15,
+   "apierr": false
+  },
+  {
+   "run": "T3-C4-r2",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0365,
+   "apierr": false
+  },
+  {
+   "run": "T3-C4-r3",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.1147,
+   "apierr": false
+  },
+  {
+   "run": "T3-C5-r1",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0433,
+   "apierr": false
+  },
+  {
+   "run": "T3-C5-r2",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.1163,
+   "apierr": false
+  },
+  {
+   "run": "T3-C5-r3",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0391,
+   "apierr": false
+  },
+  {
+   "run": "T3-C6-r1",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0366,
+   "apierr": false
+  },
+  {
+   "run": "T3-C6-r2",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0322,
+   "apierr": false
+  },
+  {
+   "run": "T3-C6-r3",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.1218,
+   "apierr": false
+  },
+  {
+   "run": "T3-C7-r1",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0305,
+   "apierr": false
+  },
+  {
+   "run": "T3-C7-r2",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0332,
+   "apierr": false
+  },
+  {
+   "run": "T3-C7-r3",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.1194,
+   "apierr": false
+  },
+  {
+   "run": "T3-C8-r1",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0316,
+   "apierr": false
+  },
+  {
+   "run": "T3-C8-r2",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.0324,
+   "apierr": false
+  },
+  {
+   "run": "T3-C8-r3",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent"
+   ],
+   "sub": [],
+   "cost": 0.1201,
+   "apierr": false
+  }
+ ],
+ "T4": [
+  {
+   "run": "t4",
+   "mode": "dontAsk",
+   "model": "claude-sonnet-5",
+   "connectors": 0,
+   "outer": [
+    "Agent",
+    "Agent",
+    "Agent",
+    "Agent",
+    "Agent",
+    "Write",
+    "Write",
+    "Agent",
+    "Write",
+    "Bash",
+    "Read",
+    "Agent",
+    "Write",
+    "Bash",
+    "Agent",
+    "Agent"
+   ],
+   "sub": [
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebSearch",
+    "WebSearch",
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebFetch",
+    "WebSearch",
+    "WebSearch",
+    "WebSearch",
+    "WebSearch",
+    "WebSearch"
+   ],
+   "cost": 1.2517,
+   "apierr": false
+  }
+ ],
+ "spend_usd": {
+  "U2 private-config canary": 0.129,
+  "U11 skill-vs-doc": 1.109,
+  "canary 1": 0.205,
+  "canary 2": 0.368,
+  "canary 3": 0.319,
+  "T1 (rules, small model)": 0.699,
+  "T2+T3": 1.883,
+  "T4 counsel": 1.252
+ },
+ "spend_total_usd": 5.964,
+ "spend_note": "T1 uses the runner's reported total ($0.699); a re-run overwrote one first-attempt log, so per-run T1 costs sum lower."
+}
