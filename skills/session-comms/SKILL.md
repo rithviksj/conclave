@@ -43,6 +43,17 @@ Claude Code already provides the transport: `ListAgents`, `SendMessage` over per
 - **Crossing** is rule 9, **budget** is rule 11, and **closing** is rule 15 of the HELLO. Pointers only; the rules are not restated here.
 - **After closing:** if the channel folder holds nothing but what you created (README, ROSTER, empty mail folders), remove it and an empty root. If it holds any mail, deleting it needs the user's OK.
 
+## Build/design coordination (optional, for substantive joint tasks)
+
+Use this in addition to the basic connect flow when the topic is a real design/build decision — new code, an architecture change, a redesign — not a status ping or a quick question. Skip it for anything the basic ASK/ANSWER flow already covers cleanly.
+
+- **Critique before consensus, not rubber-stamping.** When a peer proposes something, check it against real evidence (read the actual code/file, don't just accept an earlier agent's unverified claim) before agreeing. Push back with a specific reason if you have one; say so explicitly if you don't. A caught mistake — yours or theirs — is worth more than a fast agreement; self-correct in the open when you find one, the same skepticism rule 1's identity check already asks for.
+- **Verbatim consensus, not independent paraphrases.** Once both sides agree, one side drafts the exact final text and the other adopts it **word for word** — never each writing its own summary of "what we agreed," which drifts. If something in that text turns out wrong after the fact (a stale figure, an unverified claim), correct the record in the open rather than letting it quietly stand.
+- **Division of work, review status and a sign-off log belong in a channel-folder file** (e.g. `STATUS.md`), not scattered across messages — a table of who owns what, what's done/in-progress/pending, and a running sign-off log. Pick ONE session to own writing that file, the same way this skill has you own `SKILL.md` changes solo; everyone else sends status as messages, never edits it directly, so two sessions never race on one file.
+- **Mutual review before either side's work goes anywhere it can't be undone** (a push, a merge, a delete): each session looks at the other's actual diff or output before either one finalizes, and posts an explicit sign-off — not a silent assumption that "no news is fine."
+- **Isolate shared state before you divide work.** If the work touches one shared resource both sessions can write to at once — most commonly a single git working directory — check for that before assuming "split it in two" gives real isolation. A same-directory `git checkout -b` from two sessions is not isolation; `git worktree add` (or two separate clones) is. The same logic applies to any other shared mutable resource — one running dev server on one port, one database file — check who's using it before you touch it, the same caution rule 2 already asks for.
+- **The 3-message budget (rule 11) is a floor for a task like this, not a hard stop.** A real critique-and-consensus round routinely needs more exchanges than a simple ping. When you hit the limit and the topic is still open, tell your user and ask, exactly as rule 11 already says — don't just quietly keep going. If the user grants an exception (for example, no cap while still deciding, cap back on once execution starts), say so back to the peer explicitly so both sides know why message counts don't match the written rule, and revert to the normal budget once the task moves from deciding to doing.
+
 ## What this does NOT do
 
 - It does not authenticate a peer, enforce any rule, guarantee delivery, or make peers agree.
@@ -58,3 +69,4 @@ Claude Code already provides the transport: `ListAgents`, `SendMessage` over per
 1. Whether these instructions survive context compaction in a long thread. The HELLO block restates every rule as a hedge.
 2. Whether a user-invocable skill runs when started as `claude "/session-comms ..."`.
 3. Behavior at 4 or more sessions.
+4. The build/design coordination pattern above has run live exactly once, on one real multi-file task (2026-09-25). Not yet stress-tested the way the rest of v0.2 was (canary, simulation) — treat it as a documented starting point, not a validated protocol.
